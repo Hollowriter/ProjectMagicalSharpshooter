@@ -18,7 +18,7 @@ void Game::_Draw()
 
 Game::Game() {
     window = new RenderWindow(sf::VideoMode(800, 600), "My window");
-    // tank = new Tank();
+    girl = new Player();
     isRunning = true;
 }
 
@@ -26,6 +26,7 @@ Game::~Game() {
     if (window)
     {
         delete window;
+        delete girl;
         window = nullptr;
     }
 }

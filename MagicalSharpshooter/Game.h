@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-// #include "Tank.h"
-#include"Entity.h"
+#include"Player.h"
 
 using namespace sf;
 
@@ -11,7 +10,7 @@ private:
 	bool isRunning;
 	void _Update(float deltaTime);
 	void _Draw();
-	// Tank* tank;
+	Player* girl;
 public:
 	Game();
 	virtual ~Game();
