@@ -1,18 +1,25 @@
 #pragma once
 #include "Entity.h"
-#define ENEMYSPEED 100.0f
+#include"VectorMath.h" // Check to make that a library
+#define ENEMYSPEED 0.5f
 #define ENEMYHEALTH 1;
 class Enemy : public Entity
 {
 private:
 	Texture texture;
 	Vector2f velocity;
+	Vector2f objective;
+	VectorMath math; // Check to make this a library
 	int health;
 	float speed;
+	bool objectiveSet;
 	void Movement(float deltaTime);
 public:
 	Enemy();
 	Enemy(int _health, float _speed, string textureName);
 	~Enemy();
+	void Damaged(float damageReceived);
+	void Update(float deltaTime) override;
+	void LookAtObjective(Vector2f _objective);
 };
 

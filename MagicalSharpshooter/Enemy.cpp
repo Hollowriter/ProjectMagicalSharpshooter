@@ -2,7 +2,10 @@
 
 void Enemy::Movement(float deltaTime)
 {
-	// Make it move towards player
+	if (objectiveSet)
+	{
+		setPosition(math.Interpolate(getPosition(), objective, speed * deltaTime));
+	}
 }
 
 Enemy::Enemy() : Entity("Enemy")
@@ -11,6 +14,7 @@ Enemy::Enemy() : Entity("Enemy")
 	setTexture(texture);
 	speed = ENEMYSPEED;
 	health = ENEMYHEALTH;
+	objectiveSet = false;
 }
 
 Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
@@ -19,8 +23,25 @@ Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
 	setTexture(texture);
 	speed = _speed;
 	health = _speed;
+	objectiveSet = false;
 }
 
 Enemy::~Enemy()
 {
+}
+
+void Enemy::Damaged(float damageReceived)
+{
+	health -= damageReceived;
+}
+
+void Enemy::Update(float deltaTime)
+{
+	Movement(deltaTime);
+}
+
+void Enemy::LookAtObjective(Vector2f _objective)
+{
+	objective = _objective;
+	objectiveSet = true;
 }
