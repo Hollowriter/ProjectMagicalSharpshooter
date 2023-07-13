@@ -18,7 +18,7 @@ public:
 	Enemy();
 	Enemy(int _health, float _speed, string textureName);
 	~Enemy();
-	void Damaged(float damageReceived);
+	void Damaged(int damageReceived);
 	void Update(float deltaTime) override;
 	void LookAtObjective(Vector2f _objective);
 };

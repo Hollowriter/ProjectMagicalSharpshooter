@@ -4,7 +4,7 @@ void Enemy::Movement(float deltaTime)
 {
 	if (objectiveSet)
 	{
-		setPosition(math.Interpolate(getPosition(), objective, speed * deltaTime));
+		setPosition(math.Interpolate<sf::Vector2f>(getPosition(), objective, speed * deltaTime));
 	}
 }
 
@@ -22,7 +22,7 @@ Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
 	texture.loadFromFile(textureName);
 	setTexture(texture);
 	speed = _speed;
-	health = _speed;
+	health = _health;
 	objectiveSet = false;
 }
 
@@ -30,7 +30,7 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Damaged(float damageReceived)
+void Enemy::Damaged(int damageReceived)
 {
 	health -= damageReceived;
 }

@@ -11,7 +11,8 @@ void Game::_Draw()
     window->clear(Color::Cyan);
     for (Entity* entity : EntityManager::GetInstance()->GetEntities())
     {
-        window->draw(*entity);
+        if (entity->GetActive())
+            window->draw(*entity);
     }
     window->display();
 
@@ -28,9 +29,9 @@ Game::Game() {
 Game::~Game() {
     if (window)
     {
-        delete window;
         delete girl;
         delete testEnemy;
+        delete window;
         window = nullptr;
     }
 }
