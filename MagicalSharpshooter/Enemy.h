@@ -9,7 +9,6 @@ private:
 	Texture texture;
 	Vector2f velocity;
 	Vector2f objective;
-	VectorMath math; // Check to make this a library
 	int health;
 	float speed;
 	bool objectiveSet;

@@ -5,7 +5,7 @@ class VectorMath // Note: Check to make this a library
 {
 public:
 	template<typename T>
-	T Interpolate(T pointA, T pointB, float factor)
+	static T Interpolate(T pointA, T pointB, float factor)
 	{
 		if (factor > 1.f)
 			factor = 1.f;
@@ -13,6 +13,5 @@ public:
 			factor = 0.f;
 		return pointA + (pointB - pointA) * factor;
 	}
-	//sf::Vector2f Interpolate(sf::Vector2f pointA, sf::Vector2f pointB, float factor);
 };
 

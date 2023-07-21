@@ -4,7 +4,7 @@ void Enemy::Movement(float deltaTime)
 {
 	if (objectiveSet)
 	{
-		setPosition(math.Interpolate<sf::Vector2f>(getPosition(), objective, speed * deltaTime));
+		setPosition(VectorMath::Interpolate<sf::Vector2f>(getPosition(), objective, speed * deltaTime));
 	}
 }
 
