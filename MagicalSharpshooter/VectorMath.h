@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <SFML/Graphics.hpp>
 class VectorMath // Note: Check to make this a library
 {
 public:
@@ -14,4 +13,3 @@ public:
 		return pointA + (pointB - pointA) * factor;
 	}
 };
-
