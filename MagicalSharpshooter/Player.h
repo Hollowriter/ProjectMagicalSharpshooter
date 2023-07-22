@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Collider.h"
 #define PLAYERSPEED 200.0f
 #define PLAYERHEALTH 5;
 class Player : public Entity
@@ -7,6 +8,7 @@ class Player : public Entity
 private:
 	Texture texture;
 	Vector2f velocity;
+	Collider* collider;
 	float speed;
 	int health;
 	void Attack();
@@ -17,5 +19,6 @@ public:
 	~Player();
 	void Damaged(float damageReceived);
 	void Update(float deltaTime) override;
+	void UpdateEntityComponentPositions() override;
 };
 

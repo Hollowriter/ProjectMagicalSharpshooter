@@ -15,5 +15,6 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	void SetActive(bool _active);
 	bool GetActive();
+	virtual void UpdateEntityComponentPositions() = 0;
 };
 

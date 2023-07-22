@@ -15,6 +15,7 @@ Enemy::Enemy() : Entity("Enemy")
 	speed = ENEMYSPEED;
 	health = ENEMYHEALTH;
 	objectiveSet = false;
+	collider = new Collider(this->getPosition().x, this->getPosition().y, this->getScale().x, this->getScale().y, false);
 }
 
 Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
@@ -24,10 +25,12 @@ Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
 	speed = _speed;
 	health = _health;
 	objectiveSet = false;
+	collider = new Collider(this->getPosition().x, this->getPosition().y, this->getScale().x, this->getScale().y, false);
 }
 
 Enemy::~Enemy()
 {
+	delete collider;
 }
 
 void Enemy::Damaged(int damageReceived)
@@ -38,6 +41,11 @@ void Enemy::Damaged(int damageReceived)
 void Enemy::Update(float deltaTime)
 {
 	Movement(deltaTime);
+}
+
+void Enemy::UpdateEntityComponentPositions()
+{
+	collider->setPosition(this->getPosition());
 }
 
 void Enemy::LookAtObjective(Vector2f _objective)
