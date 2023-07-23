@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include"Player.h"
 #include"Enemy.h"
+#include"CollisionManager.h"
 
 using namespace sf;
 

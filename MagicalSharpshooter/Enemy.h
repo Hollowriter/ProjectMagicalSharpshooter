@@ -23,5 +23,6 @@ public:
 	void Update(float deltaTime) override;
 	void UpdateEntityComponentPositions() override;
 	void LookAtObjective(Vector2f _objective);
+	Collider GetCollider();
 };
 

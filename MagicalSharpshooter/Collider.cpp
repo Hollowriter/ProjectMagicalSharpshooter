@@ -1,25 +1,26 @@
 #include "Collider.h"
 
-Collider::Collider() : Entity("Collider")
+Collider::Collider()
 {
 	isSolid = false;
 }
 
-Collider::Collider(float posX, float posY, float width, float height) : Entity("Collider")
+Collider::Collider(sf::Vector2f _position, sf::Vector2f _size)
 {
-	setPosition(posX, posY);
-	setScale(width, height);
+	position = _position;
+	size = _size;
 	isSolid = false;
 }
 
-Collider::Collider(float posX, float posY, float width, float height, bool _isSolid) : Entity("Collider")
+Collider::Collider(sf::Vector2f _position, sf::Vector2f _size, bool _isSolid)
 {
-	setPosition(posX, posY);
-	setScale(width, height);
+	position = _position;
+	size = _size;
 	isSolid = _isSolid;
+	cout << position.x << " " << position.y << " " << size.x << " " << size.y << endl;
 }
 
-Collider::Collider(bool _isSolid) : Entity("Collider")
+Collider::Collider(bool _isSolid)
 {
 	isSolid = _isSolid;
 }
@@ -28,12 +29,29 @@ Collider::~Collider()
 {
 }
 
-void Collider::Update(float deltaTime)
+void Collider::SetPosition(sf::Vector2f _position)
 {
+	position = _position;
 }
 
-void Collider::UpdateEntityComponentPositions()
+void Collider::SetSize(sf::Vector2f _size)
 {
+	size = _size;
+}
+
+sf::Vector2f Collider::GetPosition()
+{
+	return position;
+}
+
+sf::Vector2f Collider::GetSize()
+{
+	return size;
+}
+
+sf::Rect<float> Collider::GetRect()
+{
+	return sf::Rect<float>(position, size);
 }
 
 bool Collider::GetIsSolid()

@@ -4,6 +4,8 @@ void Game::_Update(float deltaTime)
 {
     EntityManager::GetInstance()->UpdateEntities(deltaTime);
     testEnemy->LookAtObjective(girl->getPosition());
+    if (CollisionManager::isColliding(girl->GetCollider().GetRect(), testEnemy->GetCollider().GetRect()))
+        cout << "COLLIDE" << endl;
 }
 
 void Game::_Draw()
@@ -15,10 +17,10 @@ void Game::_Draw()
             window->draw(*entity);
     }
     window->display();
-
 }
 
-Game::Game() {
+Game::Game() 
+{
     window = new RenderWindow(sf::VideoMode(800, 600), "My window");
     girl = new Player();
     testEnemy = new Enemy();
@@ -26,7 +28,8 @@ Game::Game() {
     isRunning = true;
 }
 
-Game::~Game() {
+Game::~Game() 
+{
     if (window)
     {
         delete girl;
@@ -36,8 +39,8 @@ Game::~Game() {
     }
 }
 
-void Game::Run() {
-
+void Game::Run() 
+{
     Clock clockDelta;
     float deltaTime = clockDelta.restart().asSeconds();
     while (window->isOpen() || isRunning)

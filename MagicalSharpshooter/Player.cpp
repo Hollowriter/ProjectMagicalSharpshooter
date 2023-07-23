@@ -24,7 +24,6 @@ void Player::Movement(float deltaTime)
 		velocity.y = speed;
 	}
 	move(velocity * deltaTime);
-	UpdateEntityComponentPositions();
 }
 
 Player::Player() : Entity("Player")
@@ -33,7 +32,7 @@ Player::Player() : Entity("Player")
 	setTexture(texture);
 	speed = PLAYERSPEED;
 	health = PLAYERHEALTH;
-	collider = new Collider(this->getPosition().x, this->getPosition().y, this->getScale().x, this->getScale().y, false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
 }
 
 Player::Player(float _speed, int _health, string textureName) : Entity("Player")
@@ -42,7 +41,7 @@ Player::Player(float _speed, int _health, string textureName) : Entity("Player")
 	setTexture(texture);
 	speed = _speed;
 	health = _health;
-	collider = new Collider(this->getPosition().x, this->getPosition().y, this->getScale().x, this->getScale().y, false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
 }
 
 Player::~Player()
@@ -58,9 +57,15 @@ void Player::Damaged(float damageReceived)
 void Player::Update(float deltaTime)
 {
 	Movement(deltaTime);
+	UpdateEntityComponentPositions();
 }
 
 void Player::UpdateEntityComponentPositions()
 {
-	collider->setPosition(this->getPosition());
+	collider->SetPosition(this->getPosition());
+}
+
+Collider Player::GetCollider()
+{
+	return *collider;
 }
