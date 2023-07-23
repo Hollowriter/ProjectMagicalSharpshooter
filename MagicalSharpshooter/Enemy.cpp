@@ -15,7 +15,7 @@ Enemy::Enemy() : Entity("Enemy")
 	speed = ENEMYSPEED;
 	health = ENEMYHEALTH;
 	objectiveSet = false;
-	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Enemy", false);
 }
 
 Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
@@ -25,7 +25,7 @@ Enemy::Enemy(int _health, float _speed, string textureName) : Entity("Enemy")
 	speed = _speed;
 	health = _health;
 	objectiveSet = false;
-	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Enemy", false);
 }
 
 Enemy::~Enemy()

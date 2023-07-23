@@ -5,5 +5,6 @@
 class CollisionManager
 {
 public:
-	static bool isColliding(sf::FloatRect col1, sf::FloatRect col2);
+	static bool IsColliding(sf::FloatRect col1, sf::FloatRect col2);
+	static bool IsCollidingObject(Entity& entity1, Entity& entity2);
 };

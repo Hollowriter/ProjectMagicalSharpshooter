@@ -32,7 +32,7 @@ Player::Player() : Entity("Player")
 	setTexture(texture);
 	speed = PLAYERSPEED;
 	health = PLAYERHEALTH;
-	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Player", false);
 }
 
 Player::Player(float _speed, int _health, string textureName) : Entity("Player")
@@ -41,7 +41,7 @@ Player::Player(float _speed, int _health, string textureName) : Entity("Player")
 	setTexture(texture);
 	speed = _speed;
 	health = _health;
-	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), false);
+	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Player", false);
 }
 
 Player::~Player()

@@ -3,26 +3,29 @@
 Collider::Collider()
 {
 	isSolid = false;
+	objectAttached = "collider";
 }
 
-Collider::Collider(sf::Vector2f _position, sf::Vector2f _size)
+Collider::Collider(sf::Vector2f _position, sf::Vector2f _size, std::string _objectAttached)
 {
 	position = _position;
 	size = _size;
 	isSolid = false;
+	objectAttached = _objectAttached;
 }
 
-Collider::Collider(sf::Vector2f _position, sf::Vector2f _size, bool _isSolid)
+Collider::Collider(sf::Vector2f _position, sf::Vector2f _size, std::string _objectAttached, bool _isSolid)
 {
 	position = _position;
 	size = _size;
 	isSolid = _isSolid;
-	cout << position.x << " " << position.y << " " << size.x << " " << size.y << endl;
+	objectAttached = _objectAttached;
 }
 
-Collider::Collider(bool _isSolid)
+Collider::Collider(std::string _objectAttached, bool _isSolid)
 {
 	isSolid = _isSolid;
+	objectAttached = _objectAttached;
 }
 
 Collider::~Collider()
@@ -52,6 +55,11 @@ sf::Vector2f Collider::GetSize()
 sf::Rect<float> Collider::GetRect()
 {
 	return sf::Rect<float>(position, size);
+}
+
+std::string Collider::GetObjectAttachedName()
+{
+	return objectAttached;
 }
 
 bool Collider::GetIsSolid()
