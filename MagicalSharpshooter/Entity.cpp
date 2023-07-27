@@ -20,3 +20,8 @@ bool Entity::GetActive()
 {
 	return active;
 }
+
+string Entity::GetName()
+{
+	return name;
+}

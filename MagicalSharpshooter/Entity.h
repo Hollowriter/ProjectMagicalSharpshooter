@@ -16,5 +16,6 @@ public:
 	void SetActive(bool _active);
 	bool GetActive();
 	virtual void UpdateEntityComponentPositions() = 0;
+	string GetName();
 };
 

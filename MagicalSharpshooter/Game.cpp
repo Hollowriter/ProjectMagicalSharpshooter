@@ -4,7 +4,7 @@ void Game::_Update(float deltaTime)
 {
     EntityManager::GetInstance()->UpdateEntities(deltaTime);
     testEnemy->LookAtObjective(girl->getPosition());
-    if (CollisionManager::isColliding(girl->GetCollider().GetRect(), testEnemy->GetCollider().GetRect()))
+    if (CollisionManager::IsCollidingObject(*girl, *testEnemy, "Player", "Enemy"))
         cout << "COLLIDE" << endl;
 }
 

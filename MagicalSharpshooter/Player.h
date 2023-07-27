@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-#include "Collider.h"
+#include"Collider.h"
 #define PLAYERSPEED 200.0f
 #define PLAYERHEALTH 5;
 class Player : public Entity
