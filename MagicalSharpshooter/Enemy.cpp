@@ -49,6 +49,15 @@ void Enemy::UpdateEntityComponentPositions()
 	collider->SetPosition(this->getPosition());
 }
 
+void Enemy::ResolveCollisions(string _collisionName)
+{
+	if (_collisionName == "Bullet") 
+	{
+		Damaged(1);
+		cout << "El pepe" << endl;
+	}
+}
+
 void Enemy::LookAtObjective(Vector2f _objective)
 {
 	objective = _objective;

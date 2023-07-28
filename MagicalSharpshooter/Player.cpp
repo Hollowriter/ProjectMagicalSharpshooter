@@ -65,6 +65,15 @@ void Player::UpdateEntityComponentPositions()
 	collider->SetPosition(this->getPosition());
 }
 
+void Player::ResolveCollisions(string _collisionName)
+{
+	if (_collisionName == "Enemy") 
+	{
+		Damaged(1);
+		cout << "conoetumadre" << endl;
+	}
+}
+
 Collider Player::GetCollider()
 {
 	return *collider;

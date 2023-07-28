@@ -22,6 +22,7 @@ public:
 	void Damaged(int damageReceived);
 	void Update(float deltaTime) override;
 	void UpdateEntityComponentPositions() override;
+	void ResolveCollisions(string _collisionName) override;
 	void LookAtObjective(Vector2f _objective);
 	Collider GetCollider();
 };

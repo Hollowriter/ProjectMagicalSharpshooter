@@ -4,8 +4,7 @@ void Game::_Update(float deltaTime)
 {
     EntityManager::GetInstance()->UpdateEntities(deltaTime);
     testEnemy->LookAtObjective(girl->getPosition());
-    if (CollisionManager::IsCollidingObject(*girl, *testEnemy, "Player", "Enemy"))
-        cout << "COLLIDE" << endl;
+    CollisionManager::CollisionWithResolution(*girl, *testEnemy, "Player", "Enemy");
 }
 
 void Game::_Draw()

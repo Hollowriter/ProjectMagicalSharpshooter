@@ -20,6 +20,7 @@ public:
 	void Damaged(float damageReceived);
 	void Update(float deltaTime) override;
 	void UpdateEntityComponentPositions() override;
+	void ResolveCollisions(string _collisionName) override;
 	Collider GetCollider();
 };
 

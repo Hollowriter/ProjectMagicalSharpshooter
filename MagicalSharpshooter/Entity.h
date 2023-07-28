@@ -16,6 +16,7 @@ public:
 	void SetActive(bool _active);
 	bool GetActive();
 	virtual void UpdateEntityComponentPositions() = 0;
+	virtual void ResolveCollisions(string _collisionName) = 0;
 	string GetName();
 };
 
