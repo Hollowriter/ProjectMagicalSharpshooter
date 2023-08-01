@@ -2,6 +2,18 @@
 
 void Player::Attack()
 {
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		cout << "Pressed" << endl;
+		if (!attackPressed) 
+		{
+			BulletPool::GetInstance()->CallBullet(getPosition(), GetDirection());
+			attackPressed = true;
+			return;
+		}
+		return;
+	}
+	attackPressed = false;
 }
 
 void Player::Movement(float deltaTime)
@@ -37,6 +49,7 @@ Player::Player() : Entity("Player")
 	speed = PLAYERSPEED;
 	health = PLAYERHEALTH;
 	direction = LookDirection::DOWN;
+	attackPressed = false;
 	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Player", false);
 }
 
@@ -47,6 +60,7 @@ Player::Player(float _speed, int _health, string textureName) : Entity("Player")
 	speed = _speed;
 	health = _health;
 	direction = LookDirection::DOWN;
+	attackPressed = false;
 	collider = new Collider(this->getPosition(), this->getGlobalBounds().getSize(), "Player", false);
 }
 
@@ -63,6 +77,7 @@ void Player::Damaged(float damageReceived)
 void Player::Update(float deltaTime)
 {
 	Movement(deltaTime);
+	Attack();
 	UpdateEntityComponentPositions();
 }
 

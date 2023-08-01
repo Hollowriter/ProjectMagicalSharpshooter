@@ -1,19 +1,11 @@
 #include "BulletPool.h"
 
+BulletPool* BulletPool::instance = nullptr;
+
 BulletPool::BulletPool()
 {
     bullets = new list<Bullet*>();
     for (int i = 0; i < STANDARDPOOLSIZE; i++)
-    {
-        bullets->push_back(new Bullet());
-        bullets->back()->SetActive(false);
-    }
-}
-
-BulletPool::BulletPool(int poolSize)
-{
-    bullets = new list<Bullet*>();
-    for (int i = 0; i < poolSize; i++)
     {
         bullets->push_back(new Bullet());
         bullets->back()->SetActive(false);
@@ -37,6 +29,7 @@ void BulletPool::CallBullet(Vector2f bulletOrigin, LookDirection originDirection
         if (!(*it)->GetActive())
         {
             (*it)->ShootBullet(bulletOrigin, originDirection);
+            return;
         }
     }
 }

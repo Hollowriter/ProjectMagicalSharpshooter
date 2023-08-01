@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include"Collider.h"
 #include"StateEnums.h"
+#include"BulletPool.h"
 #define PLAYERSPEED 200.0f
 #define PLAYERHEALTH 5;
 class Player : public Entity
@@ -13,6 +14,7 @@ private:
 	LookDirection direction;
 	float speed;
 	int health;
+	bool attackPressed;
 	void Attack();
 	void Movement(float deltaTime);
 public:

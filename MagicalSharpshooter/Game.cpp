@@ -5,8 +5,6 @@ void Game::_Update(float deltaTime)
     EntityManager::GetInstance()->UpdateEntities(deltaTime);
     testEnemy->LookAtObjective(girl->getPosition());
     CollisionManager::CollisionWithResolution(*girl, *testEnemy, "Player", "Enemy");
-    if (testRun)
-        bulletPool->CallBullet(girl->getPosition(), girl->GetDirection());
 }
 
 void Game::_Draw()
@@ -26,7 +24,6 @@ Game::Game()
     girl = new Player();
     testEnemy = new Enemy();
     testEnemy->setPosition(200, 50);
-    bulletPool = new BulletPool();
     isRunning = true;
     testRun = true;
 }
@@ -38,7 +35,6 @@ Game::~Game()
         delete girl;
         delete testEnemy;
         delete window;
-        delete bulletPool;
         window = nullptr;
     }
 }

@@ -16,7 +16,6 @@ private:
 	void _Draw();
 	Player* girl;
 	Enemy* testEnemy;
-	BulletPool* bulletPool;
 public:
 	Game();
 	virtual ~Game();

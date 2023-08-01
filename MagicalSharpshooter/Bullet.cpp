@@ -22,12 +22,26 @@ void Bullet::Advance(float deltaTime)
 	move(velocity * deltaTime);
 }
 
+void Bullet::KillBullet()
+{
+	timer = 0;
+	SetActive(false);
+}
+
+void Bullet::TimeTicking(float deltaTime)
+{
+	timer += deltaTime;
+	if (timer > TIMEALIVE)
+		KillBullet();
+}
+
 Bullet::Bullet() : Entity("Bullet")
 {
 	texture.loadFromFile("Resources/Textures/Bullet.png");
 	setTexture(texture);
 	speed = STANDARDBULLETSPEED;
 	direction = LookDirection::DOWN;
+	timer = 0;
 }
 
 Bullet::~Bullet()
@@ -36,7 +50,12 @@ Bullet::~Bullet()
 
 void Bullet::Update(float deltaTime)
 {
-	Advance(deltaTime);
+	if (GetActive()) 
+	{
+		Advance(deltaTime);
+		TimeTicking(deltaTime);
+	}
+		
 }
 
 void Bullet::UpdateEntityComponentPositions()

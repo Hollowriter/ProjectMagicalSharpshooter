@@ -4,10 +4,17 @@
 class BulletPool
 {
 private:
+	static BulletPool* instance;
 	list<Bullet*>* bullets;
-public:
 	BulletPool();
-	BulletPool(int poolSize);
 	~BulletPool();
+public:
+	static BulletPool* GetInstance() {
+		if (instance == nullptr)
+		{
+			instance = new BulletPool();
+		}
+		return instance;
+	}
 	void CallBullet(Vector2f bulletOrigin, LookDirection originDirection);
 };
