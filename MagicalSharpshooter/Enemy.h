@@ -3,7 +3,7 @@
 #include"VectorMath.h" // Check to make that a library
 #include"Collider.h"
 #define ENEMYSPEED 0.5f
-#define ENEMYHEALTH 1;
+#define ENEMYHEALTH 5;
 class Enemy : public Entity
 {
 private:

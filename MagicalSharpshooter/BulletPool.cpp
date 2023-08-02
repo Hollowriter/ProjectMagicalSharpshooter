@@ -15,7 +15,8 @@ BulletPool::BulletPool()
 BulletPool::~BulletPool()
 {
     std::list<Bullet*>::iterator it;
-    for (it = bullets->begin(); it != bullets->end(); ++it) {
+    for (it = bullets->begin(); it != bullets->end(); ++it) 
+    {
         delete (*it);
     }
     bullets->clear();
@@ -25,11 +26,17 @@ BulletPool::~BulletPool()
 void BulletPool::CallBullet(Vector2f bulletOrigin, LookDirection originDirection)
 {
     std::list<Bullet*>::iterator it;
-    for (it = bullets->begin(); it != bullets->end(); ++it) {
+    for (it = bullets->begin(); it != bullets->end(); ++it) 
+    {
         if (!(*it)->GetActive())
         {
             (*it)->ShootBullet(bulletOrigin, originDirection);
             return;
         }
     }
+}
+
+list<Bullet*>* BulletPool::GetBulletList()
+{
+    return bullets;
 }

@@ -11,11 +11,14 @@ class Game {
 private:
 	RenderWindow* window;
 	bool isRunning;
-	bool testRun; // Only for testing purposes, delete afterwards
 	void _Update(float deltaTime);
 	void _Draw();
 	Player* girl;
 	Enemy* testEnemy;
+	BulletPool* bulletPool;
+	void UpdateEnemyPositioning();
+	void CheckPlayerEnemyCollsions();
+	void CheckEnemiesBulletCollisions();
 public:
 	Game();
 	virtual ~Game();

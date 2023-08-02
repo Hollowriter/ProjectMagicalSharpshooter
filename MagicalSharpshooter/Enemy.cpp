@@ -40,8 +40,11 @@ void Enemy::Damaged(int damageReceived)
 
 void Enemy::Update(float deltaTime)
 {
-	Movement(deltaTime);
-	UpdateEntityComponentPositions();
+	if (GetActive()) 
+	{
+		Movement(deltaTime);
+		UpdateEntityComponentPositions();
+	}
 }
 
 void Enemy::UpdateEntityComponentPositions()
@@ -54,7 +57,8 @@ void Enemy::ResolveCollisions(string _collisionName)
 	if (_collisionName == "Bullet") 
 	{
 		Damaged(1);
-		cout << "El pepe" << endl;
+		if (health <= 0)
+			SetActive(false);
 	}
 }
 

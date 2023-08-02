@@ -3,8 +3,9 @@
 void Game::_Update(float deltaTime)
 {
     EntityManager::GetInstance()->UpdateEntities(deltaTime);
-    testEnemy->LookAtObjective(girl->getPosition());
-    CollisionManager::CollisionWithResolution(*girl, *testEnemy, "Player", "Enemy");
+    UpdateEnemyPositioning();
+    CheckPlayerEnemyCollsions();
+    CheckEnemiesBulletCollisions();
 }
 
 void Game::_Draw()
@@ -18,14 +19,33 @@ void Game::_Draw()
     window->display();
 }
 
-Game::Game() 
+void Game::UpdateEnemyPositioning()
+{
+    testEnemy->LookAtObjective(girl->getPosition());
+}
+
+void Game::CheckPlayerEnemyCollsions()
+{
+    //CollisionManager::CollisionWithResolution(*girl, *testEnemy, "Player", "Enemy");
+}
+
+void Game::CheckEnemiesBulletCollisions()
+{
+    std::list<Bullet*>::iterator it;
+    for (it = bulletPool->GetBulletList()->begin(); it != bulletPool->GetBulletList()->end(); ++it)
+    {
+        CollisionManager::CollisionWithResolution(*testEnemy, *(*it), "Enemy", "Bullet");
+    }
+}
+
+Game::Game()
 {
     window = new RenderWindow(sf::VideoMode(800, 600), "My window");
     girl = new Player();
     testEnemy = new Enemy();
     testEnemy->setPosition(200, 50);
     isRunning = true;
-    testRun = true;
+    bulletPool = BulletPool::GetInstance();
 }
 
 Game::~Game() 

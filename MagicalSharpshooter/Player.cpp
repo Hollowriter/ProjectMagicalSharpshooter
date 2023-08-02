@@ -4,7 +4,6 @@ void Player::Attack()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		cout << "Pressed" << endl;
 		if (!attackPressed) 
 		{
 			BulletPool::GetInstance()->CallBullet(getPosition(), GetDirection());
@@ -91,7 +90,6 @@ void Player::ResolveCollisions(string _collisionName)
 	if (_collisionName == "Enemy") 
 	{
 		Damaged(1);
-		cout << "conoetumadre" << endl;
 	}
 }
 

@@ -54,8 +54,7 @@ void Bullet::Update(float deltaTime)
 	{
 		Advance(deltaTime);
 		TimeTicking(deltaTime);
-	}
-		
+	}	
 }
 
 void Bullet::UpdateEntityComponentPositions()
@@ -64,7 +63,8 @@ void Bullet::UpdateEntityComponentPositions()
 
 void Bullet::ResolveCollisions(string _collisionName)
 {
-	// Make collisions to the enemy
+	if (_collisionName == "Enemy" && GetActive())
+		KillBullet();
 }
 
 void Bullet::ShootBullet(Vector2f newPosition, LookDirection newDirection)

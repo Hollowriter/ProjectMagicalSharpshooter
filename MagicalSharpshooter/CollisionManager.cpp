@@ -9,18 +9,26 @@ bool CollisionManager::IsColliding(sf::FloatRect col1, sf::FloatRect col2)
 
 bool CollisionManager::IsCollidingObject(Entity& col1, Entity& col2, std::string colName1, std::string colName2)
 {
-    if (col1.getGlobalBounds().intersects(col2.getGlobalBounds()))
-        if (col1.GetName() == colName1 && col2.GetName() == colName2)
-            return true;
+    if (col1.GetActive() && col2.GetActive()) 
+    {
+        if (col1.getGlobalBounds().intersects(col2.getGlobalBounds()))
+            if (col1.GetName() == colName1 && col2.GetName() == colName2)
+                return true;
+    }
     return false;
 }
 
 void CollisionManager::CollisionWithResolution(Entity& col1, Entity& col2, std::string colName1, std::string colName2)
 {
-    if (col1.getGlobalBounds().intersects(col2.getGlobalBounds()))
-        if (col1.GetName() == colName1 && col2.GetName() == colName2)
+    if (col1.GetActive() && col2.GetActive()) 
+    {
+        if (col1.getGlobalBounds().intersects(col2.getGlobalBounds())) 
         {
-            col1.ResolveCollisions(colName2);
-            col2.ResolveCollisions(colName1);
+            if (col1.GetName() == colName1 && col2.GetName() == colName2)
+            {
+                col1.ResolveCollisions(colName2);
+                col2.ResolveCollisions(colName1);
+            }
         }
+    }
 }

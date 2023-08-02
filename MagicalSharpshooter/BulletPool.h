@@ -17,4 +17,5 @@ public:
 		return instance;
 	}
 	void CallBullet(Vector2f bulletOrigin, LookDirection originDirection);
+	list<Bullet*>* GetBulletList();
 };
