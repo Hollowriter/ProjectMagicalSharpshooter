@@ -71,13 +71,18 @@ Player::~Player()
 void Player::Damaged(float damageReceived)
 {
 	health -= damageReceived;
+	if (health <= 0)
+		SetActive(false);
 }
 
 void Player::Update(float deltaTime)
 {
-	Movement(deltaTime);
-	Attack();
-	UpdateEntityComponentPositions();
+	if (GetActive()) 
+	{
+		Movement(deltaTime);
+		Attack();
+		UpdateEntityComponentPositions();
+	}
 }
 
 void Player::UpdateEntityComponentPositions()

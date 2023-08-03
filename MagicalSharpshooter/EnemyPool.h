@@ -1,6 +1,5 @@
 #pragma once
 #include"Enemy.h"
-#define STANDARDPOOLSIZE 50
 class EnemyPool
 {
 private:
@@ -16,6 +15,8 @@ public:
 		}
 		return instance;
 	}
+	void GenerateEnemies(int enemyQuantity, int xOffset, int yOffset, int positionXRange, int positionYRange);
 	list<Enemy*>* GetEnemyList();
+	int GetEnemiesActive();
 };
 

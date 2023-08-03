@@ -7,6 +7,8 @@ void Game::_Update(float deltaTime)
     CheckPlayerEnemyCollsions();
     CheckEnemiesBulletCollisions();
     UpdateCameraPosition();
+    CheckGameEnd();
+    CheckGameClose(deltaTime);
 }
 
 void Game::_Draw()
@@ -23,20 +25,32 @@ void Game::_Draw()
 
 void Game::UpdateEnemyPositioning()
 {
-    testEnemy->LookAtObjective(girl->getPosition());
+    std::list<Enemy*>::iterator enemiesIt;
+    for (enemiesIt = enemyPool->GetEnemyList()->begin(); enemiesIt != enemyPool->GetEnemyList()->end(); ++enemiesIt) 
+    {
+        (*enemiesIt)->LookAtObjective(girl->getPosition());
+    }
 }
 
 void Game::CheckPlayerEnemyCollsions()
 {
-    //CollisionManager::CollisionWithResolution(*girl, *testEnemy, "Player", "Enemy");
+    std::list<Enemy*>::iterator enemiesIt;
+    for (enemiesIt = enemyPool->GetEnemyList()->begin(); enemiesIt != enemyPool->GetEnemyList()->end(); ++enemiesIt) 
+    {
+        CollisionManager::CollisionWithResolution(*girl, *(*enemiesIt), "Player", "Enemy");
+    }
 }
 
 void Game::CheckEnemiesBulletCollisions()
 {
-    std::list<Bullet*>::iterator it;
-    for (it = bulletPool->GetBulletList()->begin(); it != bulletPool->GetBulletList()->end(); ++it)
+    std::list<Bullet*>::iterator bulletIt;
+    std::list<Enemy*>::iterator enemiesIt;
+    for (bulletIt = bulletPool->GetBulletList()->begin(); bulletIt != bulletPool->GetBulletList()->end(); ++bulletIt)
     {
-        CollisionManager::CollisionWithResolution(*testEnemy, *(*it), "Enemy", "Bullet");
+        for (enemiesIt = enemyPool->GetEnemyList()->begin(); enemiesIt != enemyPool->GetEnemyList()->end(); ++enemiesIt) 
+        {
+            CollisionManager::CollisionWithResolution(*(*enemiesIt), *(*bulletIt), "Enemy", "Bullet");
+        }
     }
 }
 
@@ -45,11 +59,33 @@ void Game::UpdateCameraPosition()
     camera->setCenter(girl->getPosition());
 }
 
+void Game::CheckGameEnd()
+{
+    if (!girl->GetActive())
+    {
+        isGameFinished = true;
+    }
+    if (enemyPool->GetEnemiesActive() <= 0)
+    {
+        isGameFinished = true;
+    }
+}
+
+void Game::CheckGameClose(float deltaTime)
+{
+    if (isGameFinished) 
+    {
+        timer += deltaTime;
+        if (timer >= ENDGAMETIME)
+            window->close();
+    }
+}
+
 Game::Game()
 {
+    srand((unsigned)time(NULL));
     window = new RenderWindow(sf::VideoMode(1000, 1000), "My window");
     girl = new Player();
-    testEnemy = new Enemy();
     tileSet = new Tileset();
     camera = new View();
     const int level[] =
@@ -86,12 +122,14 @@ Game::Game()
         2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     };
     tileSet->LoadMap("Resources/Textures/MagicalGirlTileMap.png", Vector2u(32, 32), level, 26, 22);
-    testEnemy->setPosition(200, 50);
     camera->setSize(800, 300);
     camera->setCenter(girl->getPosition());
     window->setView(*camera);
     isRunning = true;
+    isGameFinished = false;
     bulletPool = BulletPool::GetInstance();
+    enemyPool = EnemyPool::GetInstance();
+    enemyPool->GenerateEnemies(15, 250, 100, 700, 500);
 }
 
 Game::~Game() 
@@ -99,7 +137,6 @@ Game::~Game()
     if (window)
     {
         delete girl;
-        delete testEnemy;
         delete tileSet;
         delete camera;
         delete window;
