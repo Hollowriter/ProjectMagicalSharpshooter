@@ -22,6 +22,7 @@ private:
 	void UpdateEnemyPositioning();
 	void CheckPlayerEnemyCollsions();
 	void CheckEnemiesBulletCollisions();
+	void UpdateCameraPosition();
 public:
 	Game();
 	virtual ~Game();

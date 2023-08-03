@@ -6,7 +6,7 @@ void Game::_Update(float deltaTime)
     UpdateEnemyPositioning();
     CheckPlayerEnemyCollsions();
     CheckEnemiesBulletCollisions();
-    camera->setCenter(girl->getPosition());
+    UpdateCameraPosition();
 }
 
 void Game::_Draw()
@@ -38,6 +38,11 @@ void Game::CheckEnemiesBulletCollisions()
     {
         CollisionManager::CollisionWithResolution(*testEnemy, *(*it), "Enemy", "Bullet");
     }
+}
+
+void Game::UpdateCameraPosition()
+{
+    camera->setCenter(girl->getPosition());
 }
 
 Game::Game()
@@ -115,7 +120,7 @@ void Game::Run()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
-
+        window->setView(*camera);
         _Update(deltaTime);
         _Draw();
     }
