@@ -18,6 +18,7 @@ private:
 	Enemy* testEnemy;
 	BulletPool* bulletPool;
 	Tileset* tileSet;
+	sf::View* camera;
 	void UpdateEnemyPositioning();
 	void CheckPlayerEnemyCollsions();
 	void CheckEnemiesBulletCollisions();

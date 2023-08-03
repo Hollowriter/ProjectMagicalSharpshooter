@@ -6,6 +6,7 @@ void Game::_Update(float deltaTime)
     UpdateEnemyPositioning();
     CheckPlayerEnemyCollsions();
     CheckEnemiesBulletCollisions();
+    camera->setCenter(girl->getPosition());
 }
 
 void Game::_Draw()
@@ -45,6 +46,7 @@ Game::Game()
     girl = new Player();
     testEnemy = new Enemy();
     tileSet = new Tileset();
+    camera = new View();
     const int level[] =
     {
         0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -80,6 +82,9 @@ Game::Game()
     };
     tileSet->LoadMap("Resources/Textures/MagicalGirlTileMap.png", Vector2u(32, 32), level, 26, 22);
     testEnemy->setPosition(200, 50);
+    camera->setSize(800, 300);
+    camera->setCenter(girl->getPosition());
+    window->setView(*camera);
     isRunning = true;
     bulletPool = BulletPool::GetInstance();
 }
@@ -91,6 +96,7 @@ Game::~Game()
         delete girl;
         delete testEnemy;
         delete tileSet;
+        delete camera;
         delete window;
         window = nullptr;
     }
