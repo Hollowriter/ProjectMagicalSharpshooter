@@ -21,6 +21,8 @@ private:
 	BulletPool* bulletPool;
 	Tileset* tileSet;
 	sf::View* camera;
+	sf::Font* font;
+	sf::Text gameOverText;
 	const float ENDGAMETIME = 3;
 	float timer;
 	void UpdateEnemyPositioning();

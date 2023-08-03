@@ -20,6 +20,7 @@ void Game::_Draw()
         if (entity->GetActive())
             window->draw(*entity);
     }
+    window->draw(gameOverText);
     window->display();
 }
 
@@ -61,13 +62,26 @@ void Game::UpdateCameraPosition()
 
 void Game::CheckGameEnd()
 {
-    if (!girl->GetActive())
+    if (!isGameFinished) 
     {
-        isGameFinished = true;
-    }
-    if (enemyPool->GetEnemiesActive() <= 0)
-    {
-        isGameFinished = true;
+        if (!girl->GetActive())
+        {
+            isGameFinished = true;
+            gameOverText.setFont(*font);
+            gameOverText.setFillColor(sf::Color::Red);
+            gameOverText.setString("GAME OVER");
+            gameOverText.setCharacterSize(30);
+            gameOverText.setPosition(girl->getPosition());
+        }
+        if (enemyPool->GetEnemiesActive() <= 0)
+        {
+            isGameFinished = true;
+            gameOverText.setFont(*font);
+            gameOverText.setFillColor(sf::Color::Yellow);
+            gameOverText.setString("YOU WIN");
+            gameOverText.setCharacterSize(30);
+            gameOverText.setPosition(girl->getPosition());
+        }
     }
 }
 
@@ -122,7 +136,7 @@ Game::Game()
         2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     };
     tileSet->LoadMap("Resources/Textures/MagicalGirlTileMap.png", Vector2u(32, 32), level, 26, 22);
-    camera->setSize(800, 300);
+    camera->setSize(500, 500);
     camera->setCenter(girl->getPosition());
     window->setView(*camera);
     isRunning = true;
@@ -130,6 +144,8 @@ Game::Game()
     bulletPool = BulletPool::GetInstance();
     enemyPool = EnemyPool::GetInstance();
     enemyPool->GenerateEnemies(15, 250, 100, 700, 500);
+    font = new Font();
+    font->loadFromFile("Resources/Fonts/mermaid/Mermaid1001.ttf");
 }
 
 Game::~Game() 
@@ -139,6 +155,7 @@ Game::~Game()
         delete girl;
         delete tileSet;
         delete camera;
+        delete font;
         delete window;
         window = nullptr;
     }
