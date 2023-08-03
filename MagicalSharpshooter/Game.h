@@ -4,6 +4,7 @@
 #include"Enemy.h"
 #include"CollisionManager.h"
 #include"BulletPool.h"
+#include"Tileset.h"
 
 using namespace sf;
 
@@ -16,6 +17,7 @@ private:
 	Player* girl;
 	Enemy* testEnemy;
 	BulletPool* bulletPool;
+	Tileset* tileSet;
 	void UpdateEnemyPositioning();
 	void CheckPlayerEnemyCollsions();
 	void CheckEnemiesBulletCollisions();
